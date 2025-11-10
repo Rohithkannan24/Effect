@@ -15,13 +15,13 @@ console.log(result)
 
 // Map - Transforms the result inside the effect
 
-const MapVal = pipe(
-  Effect.succeed(5),
-  Effect.map(x => x * 2),  // transform
-  Effect.map(x => x + 3)
-)
+        const MapVal = pipe(
+        Effect.succeed(5),
+        Effect.map(x => x * 2),  // transform
+        Effect.map(x => x + 3)
+        )
 
-Effect.runPromise(MapVal).then(console.log)
+        Effect.runPromise(MapVal).then(console.log)
 
 //flatMap -- its like a Map but instead of returning plain value.(return another effect)
         const flatMapVal = pipe(
@@ -68,3 +68,16 @@ Effect.runPromise(MapVal).then(console.log)
         const AsVal = pipe(Effect.succeed(5), Effect.as("Rohith!!!!!!"))
 
         Effect.runPromise(AsVal).then(console.log)
+
+
+//andThen--- Chains two actions, where the second action can depend on the result of the first.
+     
+        const first = Effect.succeed("Hi")
+        const second = Effect.succeed("Rohith")
+
+        const andThenVal = pipe(
+        first,
+        Effect.andThen(second)
+        )     
+
+        Effect.runPromise(andThenVal).then(console.log)
