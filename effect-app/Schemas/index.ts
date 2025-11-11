@@ -11,10 +11,10 @@ const fetchUser = Effect.tryPromise({
   catch: (err) => new Error(String(err))
 })
 
-const program = fetchUser.pipe(
+const schemasVal = fetchUser.pipe(
   Effect.flatMap(data => Schema.decode(User)(data)),
   Effect.tap(user => Console.log("User:", user)),
   Effect.catchAll(err => Console.log("Error:", err.message))
 )
 
-Effect.runPromise(program)
+Effect.runPromise(schemasVal)
