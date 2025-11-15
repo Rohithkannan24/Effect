@@ -31,7 +31,26 @@ const getUser = (userId: number): Effect.Effect<User, Error> => {
 }
 
 
-const exampleUserEffect = getUser(2)
+const exampleUserEffect = getUser(1)
 
 const result =Effect.runSync(exampleUserEffect);
 console.log(result);
+
+// Try-----------------
+
+const parse = (input: string) =>
+  // This might throw an error if input is not valid JSON
+  // Effect.try(() => JSON.parse(input))
+
+  Effect.try({
+    try:()=>JSON.parse(input),
+    catch: (unknown) => new Error(`something went wrong ${unknown}`)
+  })
+
+//      ┌─── Effect<any, UnknownException, never>
+//      ▼
+const tryVal = parse("")
+
+const res =Effect.runSyncExit(tryVal);
+
+console.log(res)

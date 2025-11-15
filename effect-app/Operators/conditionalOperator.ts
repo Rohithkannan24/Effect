@@ -1,14 +1,13 @@
-import * as Effect from "effect";
+import { Effect, Random, Console } from "effect"
 
  //---if---
 
-        // const ifVal = Effect.cond({
-        //   condition: true,
-        //   onTrue: Effect.succeed("It's true"),
-        //   onFalse: Effect.succeed("It's false")
-        // })
+const flipTheCoin = Effect.if(Random.nextBoolean, {
+  onTrue: () => Console.log("Head"), 
+  onFalse: () => Console.log("Tail") 
+})
 
-        // Effect.runPromise(ifVal).then(console.log)
+Effect.runFork(flipTheCoin)
 
 
 //When---- runs only condition is true (Effect.when(condition, effect))

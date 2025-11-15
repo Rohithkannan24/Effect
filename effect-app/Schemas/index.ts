@@ -6,8 +6,10 @@ const User = Schema.Struct({
   name: Schema.String
 })
 
+
+
 const fetchUser = Effect.tryPromise({
-  try: async () => await fetch("https://jsonplaceholder.typicode.com/users/1").then(r => r.json()),
+  try: async () => await fetch("https://jsonplaceholder.typicode.com/users/1").then(res => res.json()),
   catch: (err) => new Error(String(err))
 })
 
